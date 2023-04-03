@@ -21,7 +21,3 @@ body,
 .btn-darkgreen {
   @apply bg-darkgreen rounded-xl text-white w-[300px] h-[70px] drop-shadow-button text-2xl;
 }
-
-.btn-yellow {
-  @apply bg-yellow rounded-xl text-white w-[200px] h-[50px] drop-shadow-button text-2xl;
-}

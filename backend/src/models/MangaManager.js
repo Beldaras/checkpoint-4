@@ -5,6 +5,12 @@ class MangaManager extends AbstractManager {
     super({ table: "manga" });
   }
 
+  displayManga() {
+    return this.database.query(
+      `select name, type, picture from manga join category on idcategory = manga.category_idcategory join volume on idmanga = volume.manga_idmanga where volume.number = 1;`
+    );
+  }
+
   insert(manga) {
     return this.database.query(
       `insert into ${this.table} (name, mangaka, editor, status_idstatus, category_idcategory) values (?, ?, ?, ?, ?)`,
