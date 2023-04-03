@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import NavBar from "../components/NavBar";
 import MangaCard from "../components/MangaCard";
 
 function Manga() {
@@ -14,10 +15,12 @@ function Manga() {
 
   return (
     <div>
+        <NavBar />
       <div className="grid gap-4 grid-cols-2 p-6">
         {mangas.map((manga) => (
           <MangaCard
             key={manga.picture}
+            idmanga={manga.idmanga}
             name={manga.name}
             picture={manga.picture}
             type={manga.type}

@@ -5,6 +5,13 @@ class VolumeManager extends AbstractManager {
     super({ table: "volume" });
   }
 
+  displayById(id) {
+    return this.database.query(
+      `SELECT number, DATE_FORMAT(release_date, "%d/%m/%Y") as parution, pages, picture, volume.read, synopsis, name FROM volume join manga on idmanga = manga_idmanga where id = ?;`,
+      [id]
+    );
+  }
+
   insert(volume) {
     return this.database.query(
       `insert into ${this.table} (number, release_date, pages, picture, read, synopsis, manga_idmanga) values (?, ?, ?, ?, ?, ?, ?)`,

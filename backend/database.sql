@@ -37,12 +37,12 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `mangaDB`.`status` ;
 
 CREATE TABLE IF NOT EXISTS `mangaDB`.`status` (
-  `idstatus` INT NOT NULL,
+  `id` INT NOT NULL,
   `state` VARCHAR(55) NOT NULL,
-  PRIMARY KEY (`idstatus`))
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
-INSERT INTO `mangaDB`.`status` (`idstatus`, `state`) VALUES ('1', 'Edition complète'), ('2', 'Edition en cours');
+INSERT INTO `mangaDB`.`status` (`id`, `state`) VALUES ('1', 'Edition complète'), ('2', 'Edition en cours');
 
 -- -----------------------------------------------------
 -- Table `mangaDB`.`category`
@@ -50,12 +50,12 @@ INSERT INTO `mangaDB`.`status` (`idstatus`, `state`) VALUES ('1', 'Edition compl
 DROP TABLE IF EXISTS `mangaDB`.`category` ;
 
 CREATE TABLE IF NOT EXISTS `mangaDB`.`category` (
-  `idcategory` INT NOT NULL,
+  `id` INT NOT NULL,
   `type` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idcategory`))
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
-INSERT INTO `mangaDB`.`category` (`idcategory`, `type`) VALUES ('1', 'shonen'), ('2', 'seinen'), ('3', 'shojo');
+INSERT INTO `mangaDB`.`category` (`id`, `type`) VALUES ('1', 'shonen'), ('2', 'seinen'), ('3', 'shojo');
 
 -- -----------------------------------------------------
 -- Table `mangaDB`.`manga`
@@ -67,24 +67,24 @@ CREATE TABLE IF NOT EXISTS `mangaDB`.`manga` (
   `name` VARCHAR(100) NOT NULL,
   `mangaka` VARCHAR(155) NOT NULL,
   `editor` VARCHAR(100) NOT NULL,
-  `status_idstatus` INT NOT NULL,
-  `category_idcategory` INT NOT NULL,
-  PRIMARY KEY (`idmanga`, `status_idstatus`, `category_idcategory`),
-  INDEX `fk_manga_status2_idx` (`status_idstatus` ASC) VISIBLE,
-  INDEX `fk_manga_category1_idx` (`category_idcategory` ASC) VISIBLE,
+  `status_id` INT NOT NULL,
+  `category_id` INT NOT NULL,
+  PRIMARY KEY (`idmanga`, `status_id`, `category_id`),
+  INDEX `fk_manga_status2_idx` (`status_id` ASC) VISIBLE,
+  INDEX `fk_manga_category1_idx` (`category_id` ASC) VISIBLE,
   CONSTRAINT `fk_manga_status2`
-    FOREIGN KEY (`status_idstatus`)
-    REFERENCES `mangaDB`.`status` (`idstatus`)
+    FOREIGN KEY (`status_id`)
+    REFERENCES `mangaDB`.`status` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_manga_category1`
-    FOREIGN KEY (`category_idcategory`)
-    REFERENCES `mangaDB`.`category` (`idcategory`)
+    FOREIGN KEY (`category_id`)
+    REFERENCES `mangaDB`.`category` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-INSERT INTO `mangaDB`.`manga` (`idmanga`, `name`, `mangaka`, `editor`, `status_idstatus`, `category_idcategory`) VALUES ('1', 'Versus Fighting Story', 'Izu, Kalon, Madd', 'Glénat', '1', '1'), ('2', 'Dragon Quest - The Adventure of Daï', 'Koji Inada, Riku Sanjô, Yuji Horii', 'Delcourt/Tonkam', '2', '1');
+INSERT INTO `mangaDB`.`manga` (`idmanga`, `name`, `mangaka`, `editor`, `status_id`, `category_id`) VALUES ('1', 'Versus Fighting Story', 'Izu, Kalon, Madd', 'Glénat', '1', '1'), ('2', 'Dragon Quest - The Adventure of Daï', 'Koji Inada, Riku Sanjô, Yuji Horii', 'Delcourt/Tonkam', '2', '1');
 
 -- -----------------------------------------------------
 -- Table `mangaDB`.`volume`
@@ -92,7 +92,7 @@ INSERT INTO `mangaDB`.`manga` (`idmanga`, `name`, `mangaka`, `editor`, `status_i
 DROP TABLE IF EXISTS `mangaDB`.`volume` ;
 
 CREATE TABLE IF NOT EXISTS `mangaDB`.`volume` (
-  `idvolume` INT NOT NULL,
+  `id` INT NOT NULL,
   `number` INT NOT NULL,
   `release_date` DATE NOT NULL,
   `pages` INT NOT NULL,
@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `mangaDB`.`volume` (
   `read` TINYINT NOT NULL DEFAULT 0,
   `synopsis` TEXT NULL,
   `manga_idmanga` INT NOT NULL,
-  PRIMARY KEY (`idvolume`, `manga_idmanga`),
+  PRIMARY KEY (`id`, `manga_idmanga`),
   INDEX `fk_volume_manga1_idx` (`manga_idmanga` ASC) VISIBLE,
   CONSTRAINT `fk_volume_manga1`
     FOREIGN KEY (`manga_idmanga`)
@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS `mangaDB`.`volume` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-INSERT INTO `mangaDB`.`volume` (`idvolume`, `number`, `release_date`, `pages`, `picture`, `read`, `manga_idmanga`) VALUES ('1', '1', '2018-03-07', '192', 'VFS-T1.jpeg', '0', '1'), ('2', '2', '2018-07-04', '192', 'VFS-T2.jpeg', '0', '1'), ('3', '3', '2019-05-15', '192', 'VFS-T3.jpeg', '0', '1'), ('4', '4', '2020-02-19', '192', 'VFS-T4.jpeg', '0', '1'), ('5', '1', '2022-03-02', '336', 'Dai-T1.jpg', '0', '2'), ('6', '2', '2022-03-02', '336', 'Dai-T2.jpg', '0', '2'), ('7', '3', '2022-07-06', '352', 'Dai-T3.jpg', '0', '2'), ('8', '4', '2022-10-12', '352', 'Dai-T4.jpg', '0', '2'), ('9', '5', '2023-03-29', '288', 'Dai-T5.jpg', '0', '2'), ('10', '6', '2023-03-29', '272', 'Dai-T6.jpg', '0', '2');
+INSERT INTO `mangaDB`.`volume` (`id`, `number`, `release_date`, `pages`, `picture`, `read`, `manga_idmanga`) VALUES ('1', '1', '2018-03-07', '192', 'VFS-T1.jpeg', '0', '1'), ('2', '2', '2018-07-04', '192', 'VFS-T2.jpeg', '0', '1'), ('3', '3', '2019-05-15', '192', 'VFS-T3.jpeg', '0', '1'), ('4', '4', '2020-02-19', '192', 'VFS-T4.jpeg', '0', '1'), ('5', '1', '2022-03-02', '336', 'Dai-T1.jpg', '0', '2'), ('6', '2', '2022-03-02', '336', 'Dai-T2.jpg', '0', '2'), ('7', '3', '2022-07-06', '352', 'Dai-T3.jpg', '0', '2'), ('8', '4', '2022-10-12', '352', 'Dai-T4.jpg', '0', '2'), ('9', '5', '2023-03-29', '288', 'Dai-T5.jpg', '0', '2'), ('10', '6', '2023-03-29', '272', 'Dai-T6.jpg', '0', '2');
 
 
 -- -----------------------------------------------------

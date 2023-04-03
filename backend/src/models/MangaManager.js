@@ -7,7 +7,14 @@ class MangaManager extends AbstractManager {
 
   displayManga() {
     return this.database.query(
-      `select name, type, picture from manga join category on idcategory = manga.category_idcategory join volume on idmanga = volume.manga_idmanga where volume.number = 1;`
+      `select idmanga, name, type, picture from manga join category on category.id = manga.category_id join volume on idmanga = volume.manga_idmanga where volume.number = 1;`
+    );
+  }
+
+  displayById(idmanga) {
+    return this.database.query(
+      `select name, mangaka, editor, volume.id, number, picture, release_date, state from manga join volume on idmanga = volume.manga_idmanga join status on status.id = status_id where idmanga = ?;`,
+      [idmanga]
     );
   }
 

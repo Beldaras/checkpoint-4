@@ -14,7 +14,7 @@ const browse = (req, res) => {
 
 const read = (req, res) => {
   models.volume
-    .find(req.params.id)
+    .displayById(req.params.id)
     .then(([rows]) => {
       if (rows[0] == null) {
         res.sendStatus(404);
