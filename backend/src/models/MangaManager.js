@@ -7,7 +7,7 @@ class MangaManager extends AbstractManager {
 
   displayManga() {
     return this.database.query(
-      `select idmanga, name, type, picture from manga join category on category.id = manga.category_id join volume on idmanga = volume.manga_idmanga where volume.number = 1;`
+      `select idmanga, name, mangaka, editor, type, picture, state from manga join category on category.id = manga.category_id join volume on idmanga = volume.manga_idmanga join status on status.id = status_id where volume.number = 1;`
     );
   }
 

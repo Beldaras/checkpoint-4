@@ -21,7 +21,7 @@ class UserManager extends AbstractManager {
 
   login(email) {
     return this.database.query(
-      `select mail, hashed_password, roles from ${this.table} where email = ?`,
+      `select email, hashed_password from ${this.table} where email = ?`,
       [email]
     );
   }

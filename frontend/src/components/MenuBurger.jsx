@@ -30,9 +30,9 @@ function MenuBurger() {
             </a>
             <a
               className="block px-4 py-2 text-gray-900 hover:text-red focus:text-red"
-              href="/Collection"
+              href="/register"
             >
-              Ma collection
+              Sign in
             </a>
           </nav>
         </div>

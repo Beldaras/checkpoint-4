@@ -23,7 +23,7 @@ USE `mangaDB` ;
 DROP TABLE IF EXISTS `mangaDB`.`user` ;
 
 CREATE TABLE IF NOT EXISTS `mangaDB`.`user` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `pseudo` VARCHAR(45) NOT NULL,
   `email` VARCHAR(155) NOT NULL,
   `hashed_password` VARCHAR(255) NOT NULL,
@@ -37,7 +37,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `mangaDB`.`status` ;
 
 CREATE TABLE IF NOT EXISTS `mangaDB`.`status` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `state` VARCHAR(55) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
@@ -50,7 +50,7 @@ INSERT INTO `mangaDB`.`status` (`id`, `state`) VALUES ('1', 'Edition complète')
 DROP TABLE IF EXISTS `mangaDB`.`category` ;
 
 CREATE TABLE IF NOT EXISTS `mangaDB`.`category` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `type` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
@@ -63,7 +63,7 @@ INSERT INTO `mangaDB`.`category` (`id`, `type`) VALUES ('1', 'shonen'), ('2', 's
 DROP TABLE IF EXISTS `mangaDB`.`manga` ;
 
 CREATE TABLE IF NOT EXISTS `mangaDB`.`manga` (
-  `idmanga` INT NOT NULL,
+  `idmanga` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(100) NOT NULL,
   `mangaka` VARCHAR(155) NOT NULL,
   `editor` VARCHAR(100) NOT NULL,
@@ -92,7 +92,7 @@ INSERT INTO `mangaDB`.`manga` (`idmanga`, `name`, `mangaka`, `editor`, `status_i
 DROP TABLE IF EXISTS `mangaDB`.`volume` ;
 
 CREATE TABLE IF NOT EXISTS `mangaDB`.`volume` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `number` INT NOT NULL,
   `release_date` DATE NOT NULL,
   `pages` INT NOT NULL,

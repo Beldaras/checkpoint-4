@@ -16,7 +16,7 @@ function Manga() {
   return (
     <div>
         <NavBar />
-      <div className="grid gap-4 grid-cols-2 p-6">
+      <div className="grid gap-4 grid-cols-1 p-6">
         {mangas.map((manga) => (
           <MangaCard
             key={manga.picture}
@@ -24,6 +24,9 @@ function Manga() {
             name={manga.name}
             picture={manga.picture}
             type={manga.type}
+            mangaka={manga.mangaka}
+            state={manga.state}
+            editor={manga.editor}
           />
         ))}
       </div>
