@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import NavBar from "../components/NavBar";
 
@@ -7,6 +8,8 @@ function Register() {
   const [email, setEmail] = useState("");
   const [hashed_password, setHashedPassword] = useState("");
   const [confirm, setConfirm] = useState("");
+
+  const navigate = useNavigate();
 
   const handlePseudo = (e) => {
     setPseudo(e.target.value);
@@ -29,16 +32,14 @@ function Register() {
 
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/users`, {
-        pseudo,
         email,
         hashed_password,
       })
       .then((res) => {
-        console.log(res);
+        navigate("/");
       })
       .catch(err => console.error(err));
 
-    // console.log(pseudo, email, password);
   };
 
   return (

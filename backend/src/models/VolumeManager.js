@@ -29,17 +29,8 @@ class VolumeManager extends AbstractManager {
 
   update(volume) {
     return this.database.query(
-      `update ${this.table} set number = ?, release_date = ?, pages = ?, picture = ?, read = ?, synopsis = ?, manga_idmanga = ? where id = ?`,
-      [
-        volume.number,
-        volume.release_date,
-        volume.pages,
-        volume.picture,
-        volume.read,
-        volume.synopsis,
-        volume.manga_idmanga,
-        volume.id,
-      ]
+      `update ${this.table} set \`read\` = ? where id = ?`,
+      [volume.read, volume.id]
     );
   }
 }
