@@ -1,7 +1,9 @@
 const models = require("../models");
+const { hashPassword, verifyPassword } = require("../services/argonService");
+const { encodeJWT, decodeJWT } = require("../services/jwtService");
 
 const browse = (req, res) => {
-  models.item
+  models.user
     .findAll()
     .then(([rows]) => {
       res.send(rows);
@@ -13,7 +15,7 @@ const browse = (req, res) => {
 };
 
 const read = (req, res) => {
-  models.item
+  models.user
     .find(req.params.id)
     .then(([rows]) => {
       if (rows[0] == null) {
@@ -29,14 +31,14 @@ const read = (req, res) => {
 };
 
 const edit = (req, res) => {
-  const item = req.body;
+  const user = req.body;
 
   // TODO validations (length, format...)
 
-  item.id = parseInt(req.params.id, 10);
+  user.id = parseInt(req.params.id, 10);
 
-  models.item
-    .update(item)
+  models.user
+    .update(user)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
@@ -50,15 +52,19 @@ const edit = (req, res) => {
     });
 };
 
-const add = (req, res) => {
-  const item = req.body;
+const add = async (req, res) => {
+  const user = req.body;
 
   // TODO validations (length, format...)
 
-  models.item
-    .insert(item)
+  const hashedPassword = await hashPassword(req.body.password);
+
+  user.password = hashedPassword;
+
+  models.user
+    .insert(user)
     .then(([result]) => {
-      res.location(`/items/${result.insertId}`).sendStatus(201);
+      res.location(`/users/${result.insertId}`).sendStatus(201);
     })
     .catch((err) => {
       console.error(err);
@@ -67,7 +73,7 @@ const add = (req, res) => {
 };
 
 const destroy = (req, res) => {
-  models.item
+  models.user
     .delete(req.params.id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
@@ -82,10 +88,30 @@ const destroy = (req, res) => {
     });
 };
 
+const login = async (req, res) => {
+  const user = req.body;
+
+  const [dbUser] = await models.user.findByEmail(user.email);
+
+  const verify = await verifyPassword(dbUser[0].password, user.password);
+  if (verify) {
+    delete dbUser[0].password;
+
+    const token = encodeJWT(dbUser[0]);
+
+    res.cookie("auth_token", token, { httpOnly: true, secure: false });
+
+    res.sendStatus(200);
+  } else {
+    res.sendStatus(401);
+  }
+};
+
 module.exports = {
   browse,
   read,
   edit,
   add,
   destroy,
+  login,
 };
