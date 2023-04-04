@@ -1,4 +1,6 @@
 const models = require("../models");
+const { hashPassword, verifyPassword } = require("../services/argonService");
+const { encodeJWT, decodeJWT } = require("../services/jwtService");
 
 const browse = (req, res) => {
   models.user
@@ -50,10 +52,14 @@ const edit = (req, res) => {
     });
 };
 
-const add = (req, res) => {
+const add = async (req, res) => {
   const user = req.body;
 
   // TODO validations (length, format...)
+
+  const hashedPassword = await hashPassword(req.body.password);
+
+  user.password = hashedPassword;
 
   models.user
     .insert(user)
@@ -82,10 +88,30 @@ const destroy = (req, res) => {
     });
 };
 
+const login = async (req, res) => {
+  const user = req.body;
+
+  const [dbUser] = await models.user.findByEmail(user.email);
+
+  const verify = await verifyPassword(dbUser[0].password, user.password);
+  if (verify) {
+    delete dbUser[0].password;
+
+    const token = encodeJWT(dbUser[0]);
+
+    res.cookie("auth_token", token, { httpOnly: true, secure: false });
+
+    res.sendStatus(200);
+  } else {
+    res.sendStatus(401);
+  }
+};
+
 module.exports = {
   browse,
   read,
   edit,
   add,
   destroy,
+  login,
 };

@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `mangaDB`.`user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `pseudo` VARCHAR(45) NOT NULL,
   `email` VARCHAR(155) NOT NULL,
-  `hashed_password` VARCHAR(255) NOT NULL,
+  `password` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
