@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import Button from "./Button";
+import NavBar from "./NavBar";
 
 function VolumeCard() {
   const { id } = useParams();
@@ -14,7 +14,6 @@ function VolumeCard() {
         setVolume(res.data);
       });
   }, []);
-  console.log(volume);
 
   const handleRead = (e) => {
     if (e.target.checked === true) {
@@ -28,14 +27,14 @@ function VolumeCard() {
     axios
       .put(`${import.meta.env.VITE_BACKEND_URL}/volumes/${id}`, { read })
       .then((res) => {
-        console.log(res);
+        console.info(res);
       })
       .catch((err) => console.error(err));
   }, [read]);
 
-  console.log(read);
   return (
     <div className="flex flex-col p-6">
+        <NavBar />
       <div className="flex justify-center">
         <img
           className="w-72"

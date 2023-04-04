@@ -6,7 +6,7 @@ import NavBar from "../components/NavBar";
 function Register() {
   const [pseudo, setPseudo] = useState("");
   const [email, setEmail] = useState("");
-  const [hashed_password, setHashedPassword] = useState("");
+  const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
 
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ function Register() {
   };
 
   const handlePassword = (e) => {
-    setHashedPassword(e.target.value);
+    setPassword(e.target.value);
   };
 
   const handleConfirm = (e) => {
@@ -32,20 +32,23 @@ function Register() {
 
     axios
       .post(`${import.meta.env.VITE_BACKEND_URL}/users`, {
+        pseudo,
         email,
-        hashed_password,
+        password,
       })
       .then((res) => {
         navigate("/");
       })
-      .catch(err => console.error(err));
-
+      .catch((err) => console.error(err));
   };
 
   return (
     <div className="h-full">
       <NavBar />
-      <form className="flex flex-col items-center text-left mt-5 mb-6 gap-2" onSubmit={handleSubmit}>
+      <form
+        className="flex flex-col items-center text-left mt-5 mb-6 gap-2"
+        onSubmit={handleSubmit}
+      >
         <input
           className="border border-red h-10 rounded text-center w-56"
           type="text"
@@ -70,7 +73,7 @@ function Register() {
           name="password"
           id="password"
           placeholder="password"
-          value={hashed_password}
+          value={password}
           onChange={handlePassword}
         />
         <input
