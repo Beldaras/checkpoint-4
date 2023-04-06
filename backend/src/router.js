@@ -2,7 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 
-const { authorization } = require("./middleware/auth");
+// const { authorization } = require("./middleware/auth");
 
 const mangaControllers = require("./controllers/mangaControllers");
 
