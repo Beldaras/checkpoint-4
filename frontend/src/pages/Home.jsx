@@ -26,7 +26,7 @@ export default function Home() {
         email,
         password,
       })
-      .then((res) => {
+      .then(() => {
         navigate("/manga");
       })
       .catch((err) => console.error(err));

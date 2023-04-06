@@ -1,6 +1,6 @@
 const models = require("../models");
 const { hashPassword, verifyPassword } = require("../services/argonService");
-const { encodeJWT, decodeJWT } = require("../services/jwtService");
+const { encodeJWT } = require("../services/jwtService");
 
 const browse = (req, res) => {
   models.user
