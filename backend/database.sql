@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `mangaDB`.`user` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
-
+INSERT INTO `user`(`id`, `pseudo`, `email`, `password`) VALUES (1, 'test', 'test@gmail.com', 'aupif');
 -- -----------------------------------------------------
 -- Table `mangaDB`.`status`
 -- -----------------------------------------------------
