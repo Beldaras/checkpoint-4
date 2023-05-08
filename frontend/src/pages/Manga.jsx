@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import NavBar from "../components/NavBar";
 import MangaCard from "../components/MangaCard";
+import background from "../assets/images/background.png";
 
 function Manga() {
   const [mangas, setMangas] = useState([]);
@@ -14,9 +15,12 @@ function Manga() {
   console.log(mangas);
 
   return (
-    <div>
-        <NavBar />
-      <div className="grid gap-4 grid-cols-1 p-6">
+    <div className="bg-fixed" style={{ backgroundImage: `url(${background})` }}>
+      <NavBar />
+      <div
+        className="grid gap-4 grid-cols-1 p-6 "
+        
+      >
         {mangas.map((manga) => (
           <MangaCard
             key={manga.picture}

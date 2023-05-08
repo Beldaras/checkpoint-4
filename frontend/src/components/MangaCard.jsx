@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+
 function MangaCard({ idmanga, name, picture, type, mangaka, state, editor }) {
   return (
     <div>
       <Link to={`/Details/${idmanga}`}>
-        <div className="flex flex-col items-center w-full h-[400px] rounded-lg shadow-md p-4 bg-white">
+        <div className="flex flex-col items-center w-full h-[400px] rounded-lg shadow-md p-4 bg-white/90">
           <h1>{name}</h1>
           <p>{type}</p>
           <div className="flex justify-center items-center space-x-6 w-full m-4">

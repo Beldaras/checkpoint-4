@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import NavBar from "../components/NavBar";
+import background from "../assets/images/background.png";
+
 // import VolumeCard from "../components/VolumeCard";
 
 function Details() {
@@ -17,7 +19,7 @@ function Details() {
   }, []);
 
   return (
-    <div>
+    <div className="bg-fixed" style={{ backgroundImage: `url(${background})` }}>
       <NavBar />
       {/* <h1>{mangaDetails[0].name}</h1>
       <p>{mangaDetails[0].mangaka}</p>
@@ -27,7 +29,7 @@ function Details() {
       <div className="grid gap-4 grid-cols-2 p-6">
         {mangaDetails.map((mangaDetail) => (
           <Link to={`/VolumeCard/${mangaDetail.id}`}>
-            <div className="flex flex-col items-center w-full h-[320px] rounded-lg shadow-md p-4 bg-white">
+            <div className="flex flex-col items-center w-full h-[320px] rounded-lg shadow-md p-4 bg-white/75">
               <img
                 className="h-[220px]"
                 src={`${import.meta.env.VITE_BACKEND_URL}/assets/images/${
