@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import logo from "../assets/images/japan.png";
 import iconeBurger from "../assets/icons/menu.svg";
 
 function MenuBurger() {
@@ -37,7 +38,8 @@ function MenuBurger() {
           </nav>
         </div>
       )}
-      <h1 className="ml-20">Otaku’s Collection</h1>
+      <h1 className="ml-16 mr-16">Otaku’s Collection</h1>
+      <img src={logo} alt="logo du site" className="m-2 h-12 w-12 rounded-full"/>
     </div>
   );
 }

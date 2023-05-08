@@ -8,7 +8,7 @@ import Register from "./pages/Register";
 
 function App() {
   return (
-    <div className="h-full">
+    <div className="h-full flex flex-col justify-between items-center">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
