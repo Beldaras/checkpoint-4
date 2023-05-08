@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import logo from "../assets/images/japan.png";
 import iconeBurger from "../assets/icons/menu.svg";
 
 function MenuBurger() {
@@ -8,11 +7,11 @@ function MenuBurger() {
   return (
     <div className="relative flex items-center">
       <button
-        className="block p-4 m-2 w-14 rounded"
+        className="block w-10 rounded"
         onClick={() => setOpen(!isOpen)}
         type="button"
       >
-        <img src={iconeBurger} alt="iconeBurger" className="h-6 w-6" />
+        <img src={iconeBurger} alt="iconeBurger" className="h-10 w-10" />
       </button>
       {isOpen && (
         <div className="absolute top-12 left-20 transform -translate-x-1/2 z-10 bg-white opacity-80 rounded shadow-md py-2">
@@ -38,8 +37,7 @@ function MenuBurger() {
           </nav>
         </div>
       )}
-      <h1 className="ml-16 mr-16">Otaku’s Collection</h1>
-      <img src={logo} alt="logo du site" className="m-2 h-12 w-12 rounded-full"/>
+      
     </div>
   );
 }

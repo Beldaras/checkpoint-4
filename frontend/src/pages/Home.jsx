@@ -4,7 +4,7 @@ import axios from "axios";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import Button from "../components/Button";
-// import background from "../assets/images/backgound.png";
+import background from "../assets/images/background.png";
 
 export default function Home() {
   const [email, setEmail] = useState("");
@@ -35,7 +35,10 @@ export default function Home() {
   };
 
   return (
-    <div className="h-full flex flex-col justify-between items-center">
+    <div
+      className="h-full w-full flex flex-col justify-between items-center bg-cover bg-center"
+      style={{ backgroundImage: `url(${background})` }}
+    >
       <NavBar />
       <form
         className="flex flex-col items-center text-left mt-5 mb-6 gap-2"
